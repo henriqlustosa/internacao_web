@@ -25,23 +25,9 @@
 	   
 		<h2> Internações SGH</h2>
 		
-		 <div class="form-group col-sm-2">                      
-		   <div id="um">
-		   Data_Inicio    
-			<asp:TextBox ID="dtIni" runat="server" class="form-control" Width="120px" ></asp:TextBox> 
-		  </div>
-		  
-		 <div id="dois">
-		  Data_Fim
-			<asp:TextBox ID="dtFim" runat="server" class="form-control" Width="120px" ></asp:TextBox>   
-		  </div>
+		
 		   
-		   <div id="tres">
-			   <asp:DropDownList ID="DdlPesquisa" runat="server">
-				   <asp:ListItem Value="2">Internação</asp:ListItem>
-				   <asp:ListItem Value="1">Alta</asp:ListItem>
-			   </asp:DropDownList>
-			   </div>
+	
 	   </div> 
 	   
 		<input id="Button2" runat="server" type="button" onclick="gerarTabela()" value="Buscar Internações"
@@ -56,43 +42,22 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>
-						Prontuario
+						cd_prontuario
 					</th>
 					<th>
-						Nome
+						nm_paciente
 					</th>
 					<th>
-						Sexo
+						nascimento
 					</th>
 					<th>
-						Idade
+						nr_quarto
 					</th>
 					<th>
-						Quarto
+						dt_internacao_data
 					</th>
 					<th>
-						Leito
-					</th>
-					<th>
-						Ala
-					</th>
-					<th>
-						Clínica
-					</th>
-					<th>
-						Unidade Funcional
-					</th>
-					<th>
-						Acomodação
-					</th>
-					<th>
-						St Leito
-					</th>
-					<th>
-						Data da Internação
-					</th>
-					<th>
-						Data Entrada no Setor
+						dt_internacao_hora
 					</th>
 					<th>
 						nm_especialidade
@@ -101,47 +66,40 @@
 						nm_medico
 					</th>
 					<th>
-						dt_ultimo_evento
+						dt_ultimo_evento_data
 					</th>
+					<th>
+						dt_ultimo_evento_hora
+					</th>
+				
 					<th>
 						nm_origem
-					</th>
-					<th>
-						sg_cid
-					</th>
-					<th>
-						tx_observacao
 					</th>
 					<th>
 						nr_convenio
 					</th>
 					<th>
-						nr_plano
+						in_sexo
 					</th>
 					<th>
-						nm_convenio_plano
+						nr_idade
 					</th>
 					<th>
-						nr_crm_profissional
+						sg_cid
 					</th>
 					<th>
-						nm_carater_internacao
+						descricao_cid
 					</th>
 					<th>
-						nm_origem_internacao
+						nm_unidade_funcional
 					</th>
 					<th>
-						nr_procedimento
+						tempo
 					</th>
 					<th>
-						dt_alta_medica
+						vinculo
 					</th>
-					<th>
-						dt_saida_paciente
-					</th>
-					<th>
-						dt_tipo_alta_medica
-					</th>
+					
 				</tr>
 			</thead>
 			<tbody id="tdata">
@@ -182,24 +140,18 @@
 
 			 //Teste jr
 		function gerarTabela() {
-			var dataIni = formataData(document.getElementById('<%=dtIni.ClientID %>'));
-			var dataFim = formataData(document.getElementById('<%=dtFim.ClientID %>'));
-			var tipoPesquisa = document.getElementById('<%=DdlPesquisa.ClientID%>');
-			dadosMes(dataIni, dataFim, tipoPesquisa.value);
+		
+			dadosMes();
 			
 			
 		}
 
 		function dadosMes(dataIni, dataFim,tipoPesquisa) {
-			var dIni = JSON.stringify(dataIni);
-			var dFim = JSON.stringify(dataFim);
-			var Tpesquisa = tipoPesquisa;
-			console.log(Tpesquisa);
 			
 			jQuery.support.cors = true;
 			$.ajax({
 			async: false
-				, url: '<%= ResolveUrl("http://10.48.21.64:5000/hspmsgh-api/internacoes?tipo='+ Tpesquisa +'&dt_inicio=' + dIni + '&dt_fim=' + dFim + '") %>'
+				, url: '<%= ResolveUrl("http://10.48.21.64:5001/hspmsgh-api/censo/") %>'
 				, crossDomain: true
 				//, data: '{tipo : 1, dt_inicio: "2020-02-03", dt_fim: "2020-02-03"}'
 				, type: 'GET'
@@ -212,33 +164,23 @@
 										$("tbody").append("<tr>" +
 											"<td>" + dt.cd_prontuario + "</td>" +
 											"<td>" + dt.nm_paciente + "</td>" +
-											"<td>" + dt.in_sexo + "</td>" +
-											"<td>" + dt.nr_idade + "</td>" +
-											"<td>" + dt.nr_quarto + "</td>" +                                            
-											"<td>" + dt.nr_leito + "</td>" +
-											"<td>" + dt.nm_ala + "</td>" +
-											"<td>" + dt.nm_clinica + "</td>" +
-											"<td>" + dt.nm_unidade_funcional + "</td>" +
-											"<td>" + dt.nm_acomodacao + "</td>" +
-											"<td>" + dt.st_leito + "</td>" +
-											"<td>" + dt.dt_internacao + "</td>" +
-											"<td>" + dt.dt_entrada_setor + "</td>" +
+											"<td>" + dt.nascimento + "</td>" +
+											"<td>" + dt.nr_quarto + "</td>" +
+											"<td>" + dt.dt_internacao_data + "</td>" +                                            
+											"<td>" + dt.dt_internacao_hora + "</td>" +
 											"<td>" + dt.nm_especialidade + "</td>" +
 											"<td>" + dt.nm_medico + "</td>" +
-											"<td>" + dt.dt_ultimo_evento + "</td>" +
-											"<td>" + dt.nm_origem + "</td>" +                                            
-											"<td>" + dt.sg_cid + "</td>" +
-											"<td>" + dt.tx_observacao + "</td>" +
+											"<td>" + dt.dt_ultimo_evento_data + "</td>" +
+											"<td>" + dt.dt_ultimo_evento_hora + "</td>" +
+											"<td>" + dt.nm_origem + "</td>" +
 											"<td>" + dt.nr_convenio + "</td>" +
-											"<td>" + dt.nr_plano + "</td>" +
-											"<td>" + dt.nm_convenio_plano + "</td>" +
-											"<td>" + dt.nr_crm_profissional + "</td>" +
-											"<td>" + dt.nm_carater_internacao + "</td>" +
-											"<td>" + dt.nm_origem_internacao + "</td>" +
-											"<td>" + dt.nr_procedimento + "</td>" +
-											"<td>" + dt.dt_alta_medica + "</td>" +
-											"<td>" + dt.dt_saida_paciente + "</td>" +
-											"<td>" + dt.dc_tipo_alta_medica + "</td>" +
+											"<td>" + dt.in_sexo + "</td>" +
+											"<td>" + dt.nr_idade + "</td>" +
+											"<td>" + dt.sg_cid + "</td>" +
+											"<td>" + dt.descricao_cid + "</td>" +
+											"<td>" + dt.nm_unidade_funcional + "</td>" +
+											"<td>" + dt.tempo + "</td>" +
+											"<td>" + dt.vinculo + "</td>" +
 										 "</tr>"
 										);
 
