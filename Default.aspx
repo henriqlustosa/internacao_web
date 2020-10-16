@@ -162,25 +162,25 @@
 									console.log("passou");
 									data.forEach(function(dt) {
 										$("tbody").append("<tr>" +
-											"<td>" + dt.cd_prontuario + "</td>" +
-											"<td>" + dt.nm_paciente + "</td>" +
-											"<td>" + dt.nascimento + "</td>" +
-											"<td>" + dt.nr_quarto + "</td>" +
-											"<td>" + dt.dt_internacao_data + "</td>" +                                            
-											"<td>" + dt.dt_internacao_hora + "</td>" +
-											"<td>" + dt.nm_especialidade + "</td>" +
-											"<td>" + dt.nm_medico + "</td>" +
-											"<td>" + dt.dt_ultimo_evento_data + "</td>" +
-											"<td>" + dt.dt_ultimo_evento_hora + "</td>" +
-											"<td>" + dt.nm_origem + "</td>" +
-											"<td>" + dt.nr_convenio + "</td>" +
-											"<td>" + dt.in_sexo + "</td>" +
-											"<td>" + dt.nr_idade + "</td>" +
-											"<td>" + dt.sg_cid + "</td>" +
-											"<td>" + dt.descricao_cid + "</td>" +
-											"<td>" + dt.nm_unidade_funcional + "</td>" +
-											"<td>" + dt.tempo + "</td>" +
-											"<td>" + dt.vinculo + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.cd_prontuario) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nm_paciente) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nascimento) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nr_quarto) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.dt_internacao_data) + "</td>" +                                            
+											"<td>" + CheckNullReturnBlank(dt.dt_internacao_hora) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nm_especialidade) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nm_medico) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.dt_ultimo_evento_data) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.dt_ultimo_evento_hora) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nm_origem) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nr_convenio) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.in_sexo) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nr_idade) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.sg_cid) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.descricao_cid) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.nm_unidade_funcional) + "</td>" +
+											"<td>" + CheckNullReturnBlankTempo(dt.tempo) + "</td>" +
+											"<td>" + CheckNullReturnBlank(dt.vinculo )+ "</td>" +
 										 "</tr>"
 										);
 
@@ -198,7 +198,12 @@
 		function reloadPage() {
 			window.location.reload()
 		}
-		
+		function CheckNullReturnBlankTempo(item) {
+		    return item = (item == null) ? '' : item.replace(/day/gi, " ").replace(/s/gi, " ").replace(/00:00:00/gi, "0");
+		}
+		function CheckNullReturnBlank(item) {
+		    return item = (item == null) ? '' : item ;
+		}
 	</script>
 	
    </body>
