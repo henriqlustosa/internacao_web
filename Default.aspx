@@ -23,7 +23,7 @@
 	<form id="form1" runat="server">
 	<div class="container">    
 	   
-		<h2> Internações SGH</h2>
+		<h2> CENSO Hospitalar</h2>
 		
 		
 		   
